@@ -32,7 +32,7 @@ def SA_result():
     return(render_template("SA_result.html",r=r))
 
 @app.route("/genAI",methods=["GET","POST"])
-def SA():
+def genAI():
     name=request.form.get("q")
     return(render_template("genAI.html"))
 
@@ -40,7 +40,7 @@ def SA():
 def genAI_result():
     q=request.form.get("q")
     r = model.generate_content(q)
-    return(render_template("genAI_result.html",r=r))
+    return(render_template("genAI_result.html",r=r.candidates[0].content.parts[0].text))
 
 if __name__=="__main__":
     app.run() 
